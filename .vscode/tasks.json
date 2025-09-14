@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build WeatherServer",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/WeatherServer/WeatherServer.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build WeatherClient",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/WeatherClient/WeatherClient.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}
