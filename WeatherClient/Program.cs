@@ -38,7 +38,7 @@ else
 }
 
 // Client Initialization setting up the transport type and commands to run the server 
-await using var mcpClient = await McpClientFactory.CreateAsync(clientTransport);
+await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 
 var tools = await mcpClient.ListToolsAsync();
 
@@ -47,7 +47,7 @@ foreach (var tool in tools)
     Console.WriteLine($"Connected to server with tools: {tool.Name}"); 
 }
 
-using var anthropicClient = new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPOC_API_KEY"]))
+using var anthropicClient = new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPIC_API_KEY"]))
         .Messages
         .AsBuilder()
         .UseFunctionInvocation()
@@ -120,13 +120,15 @@ static (string command, string[] arguments) GetCommandAndArguments(string[] args
         [var script] when script.EndsWith(".py") => ("python", args),
         [var script] when script.EndsWith(".js") => ("node", args),
         [var script] when Directory.Exists(script) || (File.Exists(script) && script.EndsWith(".csproj")) => ("dotnet", ["run", "--project", script]),
-        _ => ("dotnet", ["run", "--project", Path.Combine(GetCurrentSourceDirectory(), "../WeatherServer")])
+        _ => ("dotnet run", ["--project", Path.Combine(GetCurrentSourceDirectory(), @"..\WeatherServer")])
     };
 }
 
 static string GetCurrentSourceDirectory([CallerFilePath] string? currentFile = null)
 {
     Debug.Assert(!string.IsNullOrWhiteSpace(currentFile));
-    return Path.GetDirectoryName(currentFile) ?? throw new InvalidOperationException("Unable to determine source directory.");
+    var currentSourceDirectory = Path.GetDirectoryName(currentFile) ?? throw new InvalidOperationException("Unable to determine source directory.");
+    //bool foundServer = Directory.Exists(Path.Combine(currentSourceDirectory, "../WeatherServer"));
+    return currentSourceDirectory;
 }
 
