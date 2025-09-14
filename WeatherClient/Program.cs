@@ -145,7 +145,7 @@ static (string command, string[] arguments) GetCommandAndArguments(string[] args
         [var script] when script.EndsWith(".py") => ("python", args),
         [var script] when script.EndsWith(".js") => ("node", args),
         [var script] when Directory.Exists(script) || (File.Exists(script) && script.EndsWith(".csproj")) => ("dotnet", ["run", "--project", script]),
-        _ => ("dotnet", ["run", "--project", @"c:\src\weathermcpdemo\WeatherServer"])
+        _ => ("dotnet", ["run", "--project", Path.Combine(GetCurrentSourceDirectory(), @"..\WeatherServer"), "--no-build"])
     };
 }
 

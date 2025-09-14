@@ -4,12 +4,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WeatherServer.Tools;
 
-var builder = Host.CreateEmptyApplicationBuilder(settings: null);
+var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
-    .WithToolsFromAssembly();
+    .WithTools<WeatherTools>();
 
 builder.Logging.AddConsole(options =>
 {
