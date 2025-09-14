@@ -10,7 +10,7 @@ namespace WeatherServer.Tools;
 /// MCP Server Tool that uses National Weather Service API https://api.weather.gov/ to provide weather information.
 /// </summary>
 [McpServerToolType]
-public sealed class WeatherTools
+public static class WeatherTools
 {
     [McpServerTool, Description("Get weather alerts for a US state.")]
     public static async Task<string> GetAlerts(

@@ -1,14 +1,24 @@
-﻿
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Anthropic.SDK;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Client;
 
 var builder = Host.CreateApplicationBuilder(args);
+
+// Add logging configuration
+builder.Logging.AddConsole(options =>
+{
+    options.LogToStandardErrorThreshold = LogLevel.Trace;
+});
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
+
+var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>(); // Get logger
 
 builder.Configuration
     .AddEnvironmentVariables()
@@ -18,9 +28,11 @@ IClientTransport clientTransport;
 
 var (command, arguments) = GetCommandAndArguments(args);
 
+logger.LogInformation("Starting MCP client with command: {Command} and arguments: {Arguments}", command, string.Join(' ', arguments));
+
 if (command == "http")
 {
-    // make sure AspNetCoreMcpServer is running 
+    logger.LogInformation("Using SSE transport to connect to MCP server at http://localhost:3001");
     clientTransport = new SseClientTransport(new()
     {
         Endpoint = new Uri("http://localhost:3001")
@@ -28,68 +40,81 @@ if (command == "http")
 }
 else
 {
+    logger.LogInformation("Using Stdio transport to start MCP server with command: {Command} and arguments: {Arguments}", command, string.Join(' ', arguments));
     clientTransport = new StdioClientTransport(new()
     {
         Name = "Demo Server",
         Command = command,
         Arguments = arguments
-
     });
 }
 
-// Client Initialization setting up the transport type and commands to run the server 
-await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(clientTransport);
-
-var tools = await mcpClient.ListToolsAsync();
-
-foreach (var tool in tools)
+try
 {
-    Console.WriteLine($"Connected to server with tools: {tool.Name}"); 
-}
+    // Client Initialization setting up the transport type and commands to run the server 
+    await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(clientTransport);
 
-using var anthropicClient = new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPIC_API_KEY"]))
-        .Messages
-        .AsBuilder()
-        .UseFunctionInvocation()
-        .Build();
+    var tools = await mcpClient.ListToolsAsync();
 
-var options = new ChatOptions
-{
-    MaxOutputTokens = 1000,
-    ModelId = "claude-3-5-sonnet-20241022",
-    Tools = [.. tools]
-};
-
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("MCP Client Started");
-Console.ResetColor();
-
-var messages = new List<ChatMessage>();
-var sb = new StringBuilder();
-
-PromptForInput();
-
-while (Console.ReadLine() is string query && query.Equals("exit", StringComparison.Ordinal) is false)
-{
-    if (string.IsNullOrWhiteSpace(query))
+    foreach (var tool in tools)
     {
-        PromptForInput();
-        continue;
+        logger.LogInformation("Connected to server with tool: {ToolName}", tool.Name);
+        Console.WriteLine($"Connected to server with tools: {tool.Name}"); 
     }
 
-    messages.Add(new ChatMessage(ChatRole.User, query));
-    await foreach (var message in anthropicClient.GetStreamingResponseAsync(messages, options))
-    {
-        Console.WriteLine(message);
-        sb.Append(message.ToString());
-    }
+    using var anthropicClient = new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPIC_API_KEY"]))
+            .Messages
+            .AsBuilder()
+            .UseFunctionInvocation()
+            .Build();
 
-    Console.WriteLine();
-    sb.AppendLine();
-    messages.Add(new ChatMessage(ChatRole.Assistant, sb.ToString()));
-    sb.Clear();
+    var options = new ChatOptions
+    {
+        MaxOutputTokens = 1000,
+        ModelId = "claude-3-5-sonnet-20241022",
+        Tools = [.. tools]
+    };
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    logger.LogInformation("MCP Client Started");
+    Console.WriteLine("MCP Client Started");
+    Console.ResetColor();
+
+    var messages = new List<ChatMessage>();
+    var sb = new StringBuilder();
 
     PromptForInput();
+
+    while (Console.ReadLine() is string query && query.Equals("exit", StringComparison.Ordinal) is false)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            PromptForInput();
+            continue;
+        }
+
+        messages.Add(new ChatMessage(ChatRole.User, query));
+        await foreach (var message in anthropicClient.GetStreamingResponseAsync(messages, options))
+        {
+            logger.LogTrace("Received message: {Message}", message.ToString());
+            Console.WriteLine(message);
+            sb.Append(message.ToString());
+        }
+
+        Console.WriteLine();
+        sb.AppendLine();
+        messages.Add(new ChatMessage(ChatRole.Assistant, sb.ToString()));
+        sb.Clear();
+
+        PromptForInput();
+    }
+}
+catch (Exception ex)
+{
+    logger.LogError(ex, "An error occurred while running the MCP client.");
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"Error: {ex.Message}");
+    Console.ResetColor();
 }
 
 static void PromptForInput()
@@ -120,7 +145,7 @@ static (string command, string[] arguments) GetCommandAndArguments(string[] args
         [var script] when script.EndsWith(".py") => ("python", args),
         [var script] when script.EndsWith(".js") => ("node", args),
         [var script] when Directory.Exists(script) || (File.Exists(script) && script.EndsWith(".csproj")) => ("dotnet", ["run", "--project", script]),
-        _ => ("dotnet run", ["--project", Path.Combine(GetCurrentSourceDirectory(), @"..\WeatherServer")])
+        _ => ("dotnet", ["run", "--project", @"c:\src\weathermcpdemo\WeatherServer"])
     };
 }
 
