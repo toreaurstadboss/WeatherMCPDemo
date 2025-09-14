@@ -16,13 +16,15 @@ builder.Logging.AddConsole(options =>
 {
     options.LogToStandardErrorThreshold = LogLevel.Trace;
 });
-builder.Logging.SetMinimumLevel(LogLevel.Trace);
+//builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
 var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>(); // Get logger
 
 builder.Configuration
     .AddEnvironmentVariables()
     .AddUserSecrets<Program>();
+
+//builder.Logging.ClearProviders();
 
 IClientTransport clientTransport;
 
@@ -71,7 +73,7 @@ try
     var options = new ChatOptions
     {
         MaxOutputTokens = 1000,
-        ModelId = "claude-3-5-sonnet-20241022",
+        ModelId = "claude-3-haiku-20240307",
         Tools = [.. tools]
     };
 
@@ -96,8 +98,8 @@ try
         messages.Add(new ChatMessage(ChatRole.User, query));
         await foreach (var message in anthropicClient.GetStreamingResponseAsync(messages, options))
         {
-            logger.LogTrace("Received message: {Message}", message.ToString());
-            Console.WriteLine(message);
+            //logger.LogTrace("Received message: {Message}", message.ToString());
+            Console.Write(message);
             sb.Append(message.ToString());
         }
 
