@@ -12,10 +12,10 @@ public sealed class YrTools
     public string ToolId => "Yr tool";
 
     [McpServerTool(Name = "YrWeatherCurrentWeather"), Description("Get the current weather for a location. You will only provide for now the weather right now returned by the instant details. Getting forecast with future weather information will come in later version of this function. You will use the tool 'NominatimLookupLatLongForPlace' which is available to look up the latitude and longitude from the place that is given. These are to be passed into this method." +
-        "In case you cannot resolve the latitude and longitude, you pass in latitude = 0 and longitude = 0. In that case, the method will exit informing that no results were found. It is important that you in your replies tells that the 'YrTools' is used. Also output the time of the weather in the 'time' information provided in the result, if result was provided.")]
+        "In case you cannot resolve the latitude and longitude, you pass in latitude = 0 and longitude = 0. Always state the latitude and longitude you are using and the time the weather is for initially. In that case, the method will exit informing that no results were found. It is important that you in your replies tells that the 'YrTools' is used. Also output the time of the weather in the 'time' information provided in the result, if result was provided. Use the exact result you got, do not alter them.")]
     public static async Task<string> GetCurrentWeatherForecast(
         IHttpClientFactory clientFactory,
-        [Description("The location to get weather forecast for")] string location, decimal latitude, decimal longitude)
+        [Description("Provide current weather. State the location, latitude and longitude used. Return precisely the data given. Return ALL the data you were given.")] string location, decimal latitude, decimal longitude)
     {
         if (latitude == 0 && longitude == 0)
         {
@@ -47,13 +47,13 @@ public sealed class YrTools
 
         var currentWeatherJson = new
         {
-            airPressureAtSeaLevel,
-            airTemperature,
-            cloudAreaFraction,
-            relativeHumidity,
-            windFromDirection,
-            windSpeed,
-            time
+            AirPressureAtSeaLevel = airPressureAtSeaLevel,
+            AirTemperature = airTemperature,
+            CloudAreaFraction = cloudAreaFraction,
+            RelativeHumidity = relativeHumidity,
+            WindFromDirection = windFromDirection,
+            WindSpeed = windSpeed,
+            TimeWeather = time
         };
 
         return $"Current weather : {currentWeatherJson}";
