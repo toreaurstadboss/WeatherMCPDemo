@@ -1,6 +1,6 @@
 {
   "id": "weather-client",
   "displayName": "Weather MCP Client",
-  "entryPoint": "WeatherClient.dll",
+  "entryPoint": "dotnet run --project WeatherClient",
   "protocol": "stdio"
 }

@@ -3,6 +3,7 @@ using ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text.Json;
+using WeatherServer.Common;
 
 namespace WeatherServer.Tools;
 
@@ -12,21 +13,25 @@ namespace WeatherServer.Tools;
 [McpServerToolType]
 public sealed class WeatherTools
 {
-    [McpServerTool, Description("Get weather alerts for a US state.")]
+
+    public string ToolId => "Us weather tool";
+
+    [McpServerTool(Name = "UsWeatherAlerts"), Description("Get weather alerts for a US state.")]
     public static async Task<string> GetAlerts(
-        HttpClient client,
+        IHttpClientFactory clientFactory,
         [Description("The US state to get alerts for. Use the 2 letter abbreviation for the state (e.g. NY).")] string state)
     {
+        var client = clientFactory.CreateClient(WeatherServerApiClientNames.WeatherGovApiClientName);
         using var jsonDocument = await client.ReadJsonDocumentAsync($"/alerts/active/area/{state}");
         var jsonElement = jsonDocument.RootElement;
-        var alerts = jsonElement.GetProperty("features").EnumerateArray();
+        var features = jsonElement.GetProperty("features").EnumerateArray();
 
-        if (!alerts.Any())
+        if (!features.Any())
         {
             return "No active alerts for this state.";
         }
 
-        return string.Join("\n--\n", alerts.Select(alert =>
+        return string.Join("\n--\n", features.Select(alert =>
         {
             JsonElement properties = alert.GetProperty("properties");
             return $"""
@@ -41,12 +46,13 @@ public sealed class WeatherTools
         }));
     }
 
-    [McpServerTool, Description("Get weather forecast for a location.")]
+    [McpServerTool(Name = "UsWeatherForecastLocation"), Description("Get weather forecast for a location.")]
     public static async Task<string> GetForecast(
-        HttpClient client,
+        IHttpClientFactory clientFactory,
         [Description("Latitude of the location.")] double latitude,
         [Description("Longitude of the location.")] double longitude)
     {
+        var client = clientFactory.CreateClient(WeatherServerApiClientNames.WeatherGovApiClientName);
         var pointUrl = string.Create(CultureInfo.InvariantCulture, $"/points/{latitude},{longitude}");
         using var locationDocument = await client.ReadJsonDocumentAsync(pointUrl);
         var forecastUrl = locationDocument.RootElement.GetProperty("properties").GetProperty("forecast").GetString()
