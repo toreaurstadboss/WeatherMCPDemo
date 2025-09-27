@@ -10,6 +10,7 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
+    .WithTools<YrTools>()
     .WithTools<WeatherTools>()
     .WithTools<NominatimTols>();
 
@@ -26,7 +27,7 @@ builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientNa
 
 builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, client =>
 {
-    client.BaseAddress = new Uri("https://api.yr.no");
+    client.BaseAddress = new Uri("https://api.met.no");
     client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("norwegian-weather-yrapi-democlient1-tool", "1.0"));
 });
 
