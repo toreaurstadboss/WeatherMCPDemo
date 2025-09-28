@@ -5,7 +5,9 @@ using ModelContextProtocol.Server;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 using System.Text.Json;
 using WeatherServer.Common;
 using WeatherServer.Models;
@@ -13,7 +15,6 @@ using WeatherServer.Models;
 [McpServerToolType]
 public sealed class YrTools
 {
-
     public string ToolId => "Yr tool";
 
     [McpServerTool(Name = "YrWeatherCurrentWeather")]
@@ -27,9 +28,11 @@ public sealed class YrTools
     2. Pass the resolved coordinates from the tool above and pass them into to this method.
     3. If coordinates cannot be resolved, use latitude = 0 and longitude = 0. In this case, the method will return a message indicating no results were found.
     4. In case the place passed in is for a place in United States, use instead the tool 'UsWeatherForecastLocation'.
-    5. This method is to be used when asked about the current weather right now.
+    5. This method is to be used when asked about the current weather right now. 
+    6. Use the system clock to check the date of today.
 
     Response Requirements:
+    - It is very important that the corret url is used, longitude and latitude here will be provided . $""weatherapi/locationforecast/2.0/compact?lat={{latitude}}&lon={{longitude}}""
     - Always include the latitude and longitude used.
     - Always inform about which url was used to get the data here.
     - Inform about the time when the weather is.
@@ -43,6 +46,7 @@ public sealed class YrTools
 """)]
     public static async Task<string> GetCurrentWeatherForecast(
         IHttpClientFactory clientFactory,
+        ILogger<YrTools> logger,
         [Description("Provide current weather. State the location, latitude and longitude used. Return precisely the data given. Return ALL the data you were given.")] string location, decimal latitude, decimal longitude)
     {
         if (latitude == 0 && longitude == 0)
@@ -54,7 +58,7 @@ public sealed class YrTools
 
         string url = $"weatherapi/locationforecast/2.0/compact?lat={latitude}&lon={longitude}";
         
-        Console.WriteLine($"Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}");
+        logger.LogWarning($"Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}");
 
         using var jsonDocument = await client.ReadJsonDocumentAsync(url);
         var timeseries = jsonDocument.RootElement.GetProperty("properties").GetProperty("timeseries").EnumerateArray();
@@ -64,9 +68,15 @@ public sealed class YrTools
             return $"No current weather data found for '{location}'. Try another place to query?";
         }
 
-        var currentWeatherJson = GetInformationForTimeSeries(timeseries, onlyFirst: true);
+        var currentWeatherInfos = GetInformationForTimeSeries(timeseries, onlyFirst: true);
 
-        return $"Current weather : {currentWeatherJson}";
+        var sb = new StringBuilder();
+        foreach (var info in currentWeatherInfos)
+        {
+            sb.AppendLine(info.ToString());
+        }
+
+        return sb.ToString();
     }
 
     [McpServerTool(Name = "YrWeatherTenDayForecast")]
@@ -83,8 +93,10 @@ $@"""
     5. Usually, only ten days forecast will be available, but output all data you get here. In case you are asked to provide even further into the future weather information and
     there are no available data for that, inform about that in the output.
     6. In case asked for a forecast weather, use this method. In case asked about current weather, use instead tool 'YrWeatherCurrentWeather'
+    7. Check the current day with the system clock. Forecast should be the following days from the current day.
 
     Response Requirements:
+    - It is very important that the corret url is used, longitude and latitude here will be provided . $""weatherapi/locationforecast/2.0/compact?lat={{latitude}}&lon={{longitude}}""
     - Always include the latitude and longitude used.
     - Always include the 'time' field from the result to indicate when the weather data is valid.
     - Clearly state that the data was retrieved using 'YrWeatherTenDayForecast'.
@@ -97,6 +109,7 @@ $@"""
 """)]
     public static async Task<string> GetTenDaysWeatherForecast(
      IHttpClientFactory clientFactory,
+     ILogger<YrTools> logger,
      [Description("Provide ten day forecast weather. State the location, latitude and longitude used. Return the data given. Return ALL the data you were given.")] string location, decimal latitude, decimal longitude)
     {
         if (latitude == 0 && longitude == 0)
@@ -108,7 +121,7 @@ $@"""
 
         var url = $"/weatherapi/locationforecast/2.0/compact?lat={latitude}&lon={longitude}";
 
-        Console.WriteLine($"Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}");
+        logger.LogWarning($"Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}");
 
         using var jsonDocument = await client.ReadJsonDocumentAsync(url);
         var timeseries = jsonDocument.RootElement.GetProperty("properties").GetProperty("timeseries").EnumerateArray();
@@ -118,9 +131,15 @@ $@"""
             return $"No current weather data found for '{location}'. Try another place to query?";
         }
 
-        var currentWeatherJson = GetInformationForTimeSeries(timeseries, onlyFirst: false);
+        var currentWeatherInfos = GetInformationForTimeSeries(timeseries, onlyFirst: false);
 
-        return $"Current weather : {currentWeatherJson}";
+        var sb = new StringBuilder();
+        foreach (var info in currentWeatherInfos)
+        {
+            sb.AppendLine(info.ToString());
+        }
+
+        return sb.ToString();
     }
 
     private static List<YrWeatherInfoItem> GetInformationForTimeSeries(JsonElement.ArrayEnumerator timeseries, bool onlyFirst)
@@ -181,11 +200,7 @@ $@"""
                 NextSixHoursWeatherSymbol = nextOneHourWeatherSymbol,
                 NextTwelveHoursWeatherSymbol = nextTwelveHourWeatherSymbol
             };
-
-            if (parsedDate.Subtract(DateTime.Today).TotalDays > 2)
-            {
-                continue; //do not accept forecast that is two days older than today
-            }
+        
             result.Add(weatherItem);
 
             if (onlyFirst)

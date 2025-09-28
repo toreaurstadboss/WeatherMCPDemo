@@ -14,10 +14,13 @@ builder.Services
     .WithTools<UnitedStatesWeatherTools>()
     .WithTools<NominatimTols>();
 
+// Configure logging
+builder.Logging.ClearProviders();
 builder.Logging.AddConsole(options =>
 {
-    options.LogToStandardErrorThreshold = LogLevel.Trace;
+    options.LogToStandardErrorThreshold = LogLevel.Warning;
 });
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientName, client =>
 {
@@ -28,12 +31,15 @@ builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientNa
 builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, client =>
 {
     client.BaseAddress = new Uri("https://api.met.no");
-    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("norwegian-weather-yrapi-democlient1-tool", "1.0"));
+    client.DefaultRequestHeaders.UserAgent.Clear();
+    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("yrweather-mcpdemoclient-tore-tool", "1.0"));
+    //client.DefaultRequestHeaders.UserAgent.ParseAdd("ToresMcpDemo/1.0 (+https://github.com/toreaurstadboss)");
 });
 
 builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClientName, client =>
 {
     client.BaseAddress = new Uri("https://nominatim.openstreetmap.org");
+    client.DefaultRequestHeaders.UserAgent.Clear();
     client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("nominatim-openstreetmap-api-tool", "1.0"));
 });
 

@@ -2,7 +2,7 @@
 
 namespace WeatherServer.Models
 {
-    
+
     public class YrWeatherInfoItem
     {
 
@@ -44,6 +44,25 @@ namespace WeatherServer.Models
 
         //[JsonPropertyName("data.next12_hours.summary.precipitation_amount")]
         //public double? NextTwelveHoursPrecipitationAmount { get; set; }
+
+        public override string ToString()
+        {
+            return
+$@"""
+Time = {Time},
+AirpressureAtSeaLevel = {AirPressureAtSeaLevel},
+AirTemperature = {AirTemperature},
+CloudAreaFraction = {CloudAreaFraction},
+RelativeHumidity = {RelativeHumidity},
+WindFromDirection = {WindFromDirection},
+WindSpeed = {WindSpeed}
+NextHourWeatherSymbol = {NextHourWeatherSymbol}
+NextHourPrecipitationAmount = {NextHourPrecipitationAmount}
+NextSixHoursWeatherSymbol = {NextSixHoursWeatherSymbol}
+NextSixHoursPrecipitationAmount = {NextSixHoursPrecipitationAmount}
+NextTwelveHoursWeatherSymbol = {NextTwelveHoursWeatherSymbol}
+""";
+        } //tostring override
 
     }
 
