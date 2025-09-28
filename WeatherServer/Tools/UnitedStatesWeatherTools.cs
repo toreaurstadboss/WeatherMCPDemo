@@ -11,7 +11,7 @@ namespace WeatherServer.Tools;
 /// MCP Server Tool that uses National Weather Service API https://api.weather.gov/ to provide weather information.
 /// </summary>
 [McpServerToolType]
-public sealed class WeatherTools
+public sealed class UnitedStatesWeatherTools
 {
 
     public string ToolId => "Us weather tool";

@@ -11,7 +11,7 @@ builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
     .WithTools<YrTools>()
-    .WithTools<WeatherTools>()
+    .WithTools<UnitedStatesWeatherTools>()
     .WithTools<NominatimTols>();
 
 builder.Logging.AddConsole(options =>
