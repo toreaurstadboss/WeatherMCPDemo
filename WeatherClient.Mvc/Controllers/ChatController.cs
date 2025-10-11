@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.AI;
 using ModelContextProtocol.Client;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WeatherClient.Mvc.Controllers
@@ -9,15 +10,27 @@ namespace WeatherClient.Mvc.Controllers
     [Route("[controller]")]
     public class ChatController : ControllerBase
     {
+
+        public class ChatRequest
+        {
+            [Required]
+            public string Message { get; set; } = string.Empty;
+        }
+
         private readonly ILogger<ChatController> _logger;
         private readonly IChatClient _chatClient; public ChatController(ILogger<ChatController> logger, IChatClient chatClient)
         {
             _logger = logger;
             _chatClient = chatClient;
         }
-        [HttpPost(Name = "Chat")]
-        public async Task<string> Chat([FromBody] string message)
+        [HttpPost(Name = "ListMcpToolsOnServer")]
+        public async Task<string> ListMcpToolsOnServer([FromBody] ChatRequest chatRequest)
         {
+            if (string.IsNullOrWhiteSpace(chatRequest.Message))
+            {
+                return await Task.FromResult("Please provide your message");
+            }
+
             // Create MCP client connecting to our MCP server
             var mcpClient = await McpClientFactory.CreateAsync(
                 new SseClientTransport(
@@ -34,14 +47,19 @@ namespace WeatherClient.Mvc.Controllers
             {
                 new ChatMessage(ChatRole.System, "You are a helpful assistant.")
             };
-            messages.Add(new(ChatRole.User, message));
+            messages.Add(new(ChatRole.User, chatRequest.Message));
             // Get streaming response and collect updates
             List<ChatResponseUpdate> updates = [];
             StringBuilder result = new StringBuilder();
 
             await foreach (var update in _chatClient.GetStreamingResponseAsync(
                 messages,
-                new() { Tools = [.. tools] }
+                new ChatOptions{ 
+                    ModelId = "claude-3-haiku-20240307",
+                    MaxOutputTokens = 1000,
+                    Tools = [.. tools]
+                }
+
             ))
             {
                 result.Append(update);
