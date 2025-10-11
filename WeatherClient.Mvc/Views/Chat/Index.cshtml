@@ -44,6 +44,14 @@
                 <textarea class="form-control chat-box" id="message" placeholder="Type your question here..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Send</button>
+
+            
+            <div class="mt-3" id="progressContainer" style="display: none;">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+                </div>
+            </div>
+
         </form>
 
         <div class="mt-4">
@@ -51,6 +59,8 @@
             <textarea class="form-control response-box" id="response"></textarea>
             <div class="mt-2 text-muted" id="duration"></div>
         </div>
+
+
     </div>
 
 <script>
@@ -61,8 +71,11 @@
         const responseBox = document.getElementById("response");
         const durationBox = document.getElementById("duration");
 
+        const progressContainer = document.getElementById("progressContainer");
+
         responseBox.value = "";
         durationBox.textContent = "";
+        progressContainer.style.display = "block"; // Show progress bar
 
         const startTime = performance.now();
 
@@ -96,6 +109,8 @@
 
         const endTime = performance.now();
         durationBox.textContent = `Response time: ${(endTime - startTime).toFixed(2)} ms`;
+        progressContainer.style.display = "none"; //Hide progress bar 
+
     });
 </script>
 

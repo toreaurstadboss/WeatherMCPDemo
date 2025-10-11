@@ -1,3 +1,5 @@
+using Anthropic.SDK;
+using Microsoft.Extensions.AI;
 using System.Net.Http.Headers;
 using WeatherServer.Common;
 using WeatherServer.Tools;
@@ -55,6 +57,13 @@ namespace WeatherServer.Http
                 client.DefaultRequestHeaders.UserAgent.Clear();
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("nominatim-openstreetmap-client2-api-tool", "1.0"));
             });
+
+            // Set up Anthropic client
+
+            builder.Services.AddChatClient(_ =>
+                new ChatClientBuilder(new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPIC_API_KEY"])).Messages)
+                    .UseFunctionInvocation()
+                    .Build());
 
             var app = builder.Build();
 
