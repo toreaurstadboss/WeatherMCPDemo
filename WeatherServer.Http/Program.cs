@@ -15,7 +15,7 @@ namespace WeatherServer.Http
             // Add MCP support
             builder.Services
                 .AddMcpServer()
-                .WithStdioServerTransport()
+                .WithHttpTransport()
                 .WithTools<YrTools>()
                 .WithTools<UnitedStatesWeatherTools>()
                 .WithTools<NominatimTols>();
@@ -68,6 +68,8 @@ namespace WeatherServer.Http
 
             app.UseSwagger();
             app.UseSwaggerUI();
+
+            app.MapMcp("/sse"); // This exposes the SSE endpoint at /sse
 
             app.Run();
         }
