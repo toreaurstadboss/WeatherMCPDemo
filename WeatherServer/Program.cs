@@ -14,8 +14,6 @@ builder.Services
     .WithTools<UnitedStatesWeatherTools>()
     .WithTools<NominatimTols>();
 
-builder.Services.AddControllers();
-
 // Configure logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole(options =>
@@ -45,9 +43,5 @@ builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClien
     client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("nominatim-openstreetmap-api-tool", "1.0"));
 });
 
-
 var app = builder.Build();
-
-
-
 await app.RunAsync();
