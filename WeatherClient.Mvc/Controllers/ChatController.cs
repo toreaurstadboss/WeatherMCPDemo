@@ -8,7 +8,7 @@ namespace WeatherClient.Mvc.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ChatController : ControllerBase
+    public class ChatController : Controller
     {
 
         public class ChatRequest
@@ -23,8 +23,16 @@ namespace WeatherClient.Mvc.Controllers
             _logger = logger;
             _chatClient = chatClient;
         }
-        [HttpPost(Name = "ListMcpToolsOnServer")]
-        public async Task<string> ListMcpToolsOnServer([FromBody] ChatRequest chatRequest)
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View("Index");
+        }
+
+
+        [HttpPost(Name = "Chat")]
+        public async Task<string> Chat([FromBody] ChatRequest chatRequest)
         {
             if (string.IsNullOrWhiteSpace(chatRequest.Message))
             {

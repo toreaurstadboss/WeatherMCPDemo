@@ -58,7 +58,7 @@ namespace WeatherClient.Mvc
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Chat}/{action=Index}/{id?}");
 
             // add swagger ui
             app.UseSwagger();

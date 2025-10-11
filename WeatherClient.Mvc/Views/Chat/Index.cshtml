@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Chat with Claude";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://fonts.googleapismily=Roboto&display=swap" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 2rem;
+        }
+        .chat-box {
+            resize: none;
+            height: 150px;
+        }
+        .response-box {
+            height: 200px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">WeatherServices - Chat with Claude</h1>
+        <h4 class="mb-5">Supported services: US Weather Service, Yr Weather Service, Nominatim OpenMaps API LatLong</h4>
+        <form id="chatForm">
+            <div class="mb-3">
+                <label for="message" class="form-label">Your Question e.g. what is the weather this day at my location (insert your location here)</label>
+                <textarea class="form-control chat-box" id="message" placeholder="Type your question here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+
+        <div class="mt-4">
+            <label for="response" class="form-label">Response</label>
+            <textarea class="form-control response-box" id="response" readonly></textarea>
+            <div class="mt-2 text-muted" id="duration"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("chatForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const message = document.getElementById("message").value;
+            const responseBox = document.getElementById("response");
+            const durationBox = document.getElementById("duration");
+
+            responseBox.value = "";
+            durationBox.textContent = "";
+
+            const startTime = performance.now();
+
+            const res = await fetch("/Chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message })
+            });
+
+            const text = await res.text();
+            const endTime = performance.now();
+
+            responseBox.value = text;
+            durationBox.textContent = `Response time: ${(endTime - startTime).toFixed(2)} ms`;
+        });
+    </script>
+</body>
+</html>
