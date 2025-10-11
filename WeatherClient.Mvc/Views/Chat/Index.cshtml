@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
-    <link href="https://fonts.googleapismily=Roboto&display=swap" />
+   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -17,10 +17,21 @@
             resize: none;
             height: 150px;
         }
-        .response-box {
-            height: 400px; /* set the height of response box*/
-            resize: vertical;
-        }
+       
+   .response-box {
+        height: 400px;
+        resize: vertical;
+        background-color: #ffffff;
+        color: #0d3b66; /* Dark blue */
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.2rem;
+        font-weight:600;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        overflow-y: auto;
+    }
+
     </style>
 </head>
 <body>
@@ -37,37 +48,56 @@
 
         <div class="mt-4">
             <label for="response" class="form-label">Response</label>
-            <textarea class="form-control response-box" id="response" readonly></textarea>
+            <textarea class="form-control response-box" id="response"></textarea>
             <div class="mt-2 text-muted" id="duration"></div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        document.getElementById("chatForm").addEventListener("submit", async function (e) {
-            e.preventDefault();
-            const message = document.getElementById("message").value;
-            const responseBox = document.getElementById("response");
-            const durationBox = document.getElementById("duration");
+<script>
+    document.getElementById("chatForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-            responseBox.value = "";
-            durationBox.textContent = "";
+        const message = document.getElementById("message").value;
+        const responseBox = document.getElementById("response");
+        const durationBox = document.getElementById("duration");
 
-            const startTime = performance.now();
+        responseBox.value = "";
+        durationBox.textContent = "";
 
-            const res = await fetch("/Chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ message })
-            });
+        const startTime = performance.now();
 
-            const text = await res.text();
-            const endTime = performance.now();
-
-            responseBox.value = text;
-            durationBox.textContent = `Response time: ${(endTime - startTime).toFixed(2)} ms`;
+        const res = await fetch("/Chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message })
         });
-    </script>
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+
+        let buffer = "";
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            buffer += chunk;
+
+            // Typing animation: show one character at a time
+            for (let char of chunk) {
+                responseBox.value += char;
+                responseBox.scrollTop = responseBox.scrollHeight;
+                await new Promise(resolve => setTimeout(resolve, 5)); // Typing speed in ms
+            }
+        }
+
+        const endTime = performance.now();
+        durationBox.textContent = `Response time: ${(endTime - startTime).toFixed(2)} ms`;
+    });
+</script>
+
 </body>
 </html>
