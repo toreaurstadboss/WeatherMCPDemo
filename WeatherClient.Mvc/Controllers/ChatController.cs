@@ -32,11 +32,21 @@ namespace WeatherClient.Mvc.Controllers
 
 
         [HttpPost(Name = "Chat")]
-        public async Task<string> Chat([FromBody] ChatRequest chatRequest)
+        [Produces("text/plain")]
+        public async Task Chat([FromBody] ChatRequest chatRequest)
         {
+            //TODO : Add support for 'chat history' to gradually build context here - repetively provide more info and context to the Claude LLM.
+
+            Response.ContentType = "text/plain";
+            Response.Headers.Append("Cache-Control", "no-cache");
+
             if (string.IsNullOrWhiteSpace(chatRequest.Message))
             {
-                return await Task.FromResult("Please provide your message");
+
+                var error = Encoding.UTF8.GetBytes("Please provide your message.");
+                await Response.Body.WriteAsync(error);
+                await Response.Body.FlushAsync();
+                return;
             }
 
             // Create MCP client connecting to our MCP server
@@ -58,7 +68,6 @@ namespace WeatherClient.Mvc.Controllers
             messages.Add(new(ChatRole.User, chatRequest.Message));
             // Get streaming response and collect updates
             List<ChatResponseUpdate> updates = [];
-            StringBuilder result = new StringBuilder();
 
             await foreach (var update in _chatClient.GetStreamingResponseAsync(
                 messages,
@@ -70,12 +79,12 @@ namespace WeatherClient.Mvc.Controllers
 
             ))
             {
-                result.Append(update);
-                updates.Add(update);
+                var text = update.ToString();
+                var bytes = Encoding.UTF8.GetBytes(text);
+                await Response.Body.WriteAsync(bytes);
+                await Response.Body.FlushAsync();
             }
-            // Add the assistant's responses to the message history
-            messages.AddMessages(updates);
-            return result.ToString();
         }
+
     }
 }
