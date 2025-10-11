@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherClient.Blazor", "WeatherClient.Blazor\WeatherClient.Blazor.csproj", "{6FCAC37D-D1DD-41AF-B532-12AA121C0A8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherServer.Http", "WeatherServer.Http\WeatherServer.Http.csproj", "{53360578-84DF-4293-84B3-4A914943620B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{6FCAC37D-D1DD-41AF-B532-12AA121C0A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FCAC37D-D1DD-41AF-B532-12AA121C0A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FCAC37D-D1DD-41AF-B532-12AA121C0A8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53360578-84DF-4293-84B3-4A914943620B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53360578-84DF-4293-84B3-4A914943620B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53360578-84DF-4293-84B3-4A914943620B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53360578-84DF-4293-84B3-4A914943620B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
