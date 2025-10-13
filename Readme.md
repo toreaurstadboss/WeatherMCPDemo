@@ -2,6 +2,8 @@
 
 WeatherMcpDemo is a .NET 8 Razor Pages solution for retrieving, processing, and displaying weather data from multiple sources. It demonstrates modular design, extensibility, and integration with external APIs, focusing on clean separation of concerns and maintainability.
 
+![WeatherMCP logo](weatherlogo123.jpg)
+
 ## Features
 
 - Fetches weather data from the National Weather Service ([api.weather.gov](https://api.weather.gov))
