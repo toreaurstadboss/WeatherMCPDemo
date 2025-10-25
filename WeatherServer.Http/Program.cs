@@ -1,5 +1,8 @@
 using Anthropic.SDK;
 using Microsoft.Extensions.AI;
+using ModelContextProtocol.Client;
+using ModelContextProtocol.Protocol;
+using ModelContextProtocol.Server;
 using System.Net.Http.Headers;
 using WeatherServer.Common;
 using WeatherServer.Tools;
@@ -21,6 +24,30 @@ namespace WeatherServer.Http
                 .WithTools<YrTools>()
                 .WithTools<UnitedStatesWeatherTools>()
                 .WithTools<NominatimTols>();
+
+            builder.Services.Configure<McpClientOptions>(options =>
+            {
+                builder.Configuration.GetSection("McpClient");
+            });
+
+            var mcpEndpoint = builder.Configuration.GetSection("McpClient:Endpoint").Value;
+
+            builder.Services.AddSingleton<IMcpClient>(provider =>
+            {
+                return McpClientFactory.CreateAsync(
+                    new SseClientTransport(
+                        new SseClientTransportOptions
+                        {
+                            Endpoint = new Uri(mcpEndpoint!)
+                        }
+                    )).GetAwaiter().GetResult();
+            });            
+
+            builder.Services.Configure<ModelContextProtocol.Protocol.Implementation>(options =>
+            {
+                options.Title = "WeatherMcpDemoServer";
+                options.Version = "1.1";
+            });
 
             //Add swagger support
             builder.Services.AddControllers();
