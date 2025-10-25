@@ -1,0 +1,28 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "WeatherClient\\WeatherClient.Console.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "WeatherServer\\WeatherServer.Console.csproj",
+        "Action": "Start"
+      }
+    ]
+  },
+  {
+    "Name": "New Profile (1)",
+    "Projects": [
+      {
+        "Path": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -2,18 +2,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherClient", "WeatherClient\WeatherClient.csproj", "{D7AAC71A-DD2E-B5D5-8497-7AEF6F6CDD90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherClient.Console", "WeatherClient\WeatherClient.Console.csproj", "{D7AAC71A-DD2E-B5D5-8497-7AEF6F6CDD90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherServer", "WeatherServer\WeatherServer.csproj", "{7E0521FE-9AD8-23B8-D58B-C80DDBB553BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherServer.Console", "WeatherServer\WeatherServer.Console.csproj", "{7E0521FE-9AD8-23B8-D58B-C80DDBB553BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
+		weatherlogo123.jpg = weatherlogo123.jpg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherServer.Http", "WeatherServer.Http\WeatherServer.Http.csproj", "{53360578-84DF-4293-84B3-4A914943620B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherServer.Web.Http", "WeatherServer.Http\WeatherServer.Web.Http.csproj", "{53360578-84DF-4293-84B3-4A914943620B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherClient.Mvc", "WeatherClient.Mvc\WeatherClient.Mvc.csproj", "{4F6779C3-E7F0-437B-81AF-C891493CFD33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherClient.Web.Mvc", "WeatherClient.Mvc\WeatherClient.Web.Mvc.csproj", "{4F6779C3-E7F0-437B-81AF-C891493CFD33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherServer.Common", "WeatherServer.Common\WeatherServer.Common.csproj", "{E57B7B20-DCC3-4260-AF8D-C3F5B7E61442}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +40,10 @@ Global
 		{4F6779C3-E7F0-437B-81AF-C891493CFD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F6779C3-E7F0-437B-81AF-C891493CFD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F6779C3-E7F0-437B-81AF-C891493CFD33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E57B7B20-DCC3-4260-AF8D-C3F5B7E61442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E57B7B20-DCC3-4260-AF8D-C3F5B7E61442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E57B7B20-DCC3-4260-AF8D-C3F5B7E61442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E57B7B20-DCC3-4260-AF8D-C3F5B7E61442}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

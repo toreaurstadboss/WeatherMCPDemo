@@ -20,4 +20,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherServer.Common\WeatherServer.Common.csproj" />
+  </ItemGroup>
+
 </Project>

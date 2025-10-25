@@ -32,7 +32,7 @@ builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, clie
 {
     client.BaseAddress = new Uri("https://api.met.no");
     client.DefaultRequestHeaders.UserAgent.Clear();
-    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("yrweather-mcpdemoclient-tore-tool", "1.0"));
+    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("yrweather-mcpdemoclient7-tore-tool", "1.0"));
     //client.DefaultRequestHeaders.UserAgent.ParseAdd("ToresMcpDemo/1.0 (+https://github.com/toreaurstadboss)");
 });
 
