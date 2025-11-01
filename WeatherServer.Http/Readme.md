@@ -62,7 +62,7 @@ Run this command to start ModelInspector, you will need to have Node installed w
 that supports modern ES modules and fetch API, so at least Node version 20. I tested with 
 Node version 25.
 
-Starting Model Inspector
+## Starting Model Inspector
 
 To start up Model Inspector, start the project WeatherServer.Web.Http and connect
 Model Inspector.
@@ -100,3 +100,15 @@ You will get the description of each tool and by selecting a tool, you can provi
 parameters and also see Description / Instruction usage. 
 
 
+## Getting Json-Rpc metadata from Swagger
+
+Just start the server and Swagger shows up. Choose the Tools controller, that is endpoint
+which will show the Json-RCP metadata from the MCP server.
+
+![Swagger Json-RPC metdata from MCP server](McpSwaggerJsonRpc.png)
+
+Hit the <em>GET method</em> to get the metadata.
+
+The Json-Rpc browser data can be browsed with a tool like <em>JsonCrack</em> online :
+
+![MCP Json-RPC Browser](McpJsonBrowser1.png)
