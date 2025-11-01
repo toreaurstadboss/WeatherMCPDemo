@@ -36,7 +36,7 @@ public sealed class NominatimTols
             var pointCoordinates = geometry.GetProperty("coordinates").EnumerateArray();
             if (pointCoordinates.Any())
             {
-                return $"Latitude: {pointCoordinates.ElementAt(0)}, Longitude: {pointCoordinates.ElementAt(1)}";
+                return $"Latitude: {pointCoordinates.ElementAt(1)}, Longitude: {pointCoordinates.ElementAt(0)}";
             }
         }
 

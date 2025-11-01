@@ -4,6 +4,7 @@ using ModelContextProtocol.Client;
 using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using WeatherServer.Common;
 using WeatherServer.Tools;
 
@@ -29,6 +30,40 @@ namespace WeatherServer.Http
             {
                 builder.Configuration.GetSection("McpClient");
             });
+
+            // Setup SSL certificate
+
+            string subjectName = builder.Configuration["McpServer:CertificateSettings:SubjectName"]!;
+            string? portnumberMcpRaw = builder.Configuration["McpServer:Portnumber"]!;
+
+            int portnumberMcp = 7145;
+            if (int.TryParse(portnumberMcpRaw, out var portnumberMcpFromConfig))
+            {
+                portnumberMcp = portnumberMcpFromConfig;
+            }
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenLocalhost(portnumberMcp, listenOptions =>
+                {
+                    using var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+                    store.Open(OpenFlags.ReadOnly);
+
+                    var certs = store.Certificates.Find(
+                        X509FindType.FindBySubjectName,
+                        subjectName,
+                        validOnly: false);
+
+                    var certificate = certs.FirstOrDefault();
+                    if (certificate == null)
+                    {
+                        throw new InvalidOperationException("Certificate not found.");
+                    }
+
+                    listenOptions.UseHttps(certificate);                    
+                });
+            });
+
 
             var mcpEndpoint = builder.Configuration.GetSection("McpClient:Endpoint").Value;
 
