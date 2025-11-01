@@ -71,7 +71,8 @@ namespace WeatherClient.Mvc.Controllers
 
             await foreach (var update in _chatClient.GetStreamingResponseAsync(
                 messages,
-                new ChatOptions{ 
+                new ChatOptions
+                {
                     ModelId = "claude-3-haiku-20240307",
                     MaxOutputTokens = 1000,
                     Tools = [.. tools]

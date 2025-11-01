@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
 
 namespace WeatherServer.Web.Http.Controllers
 {
@@ -36,7 +34,7 @@ namespace WeatherServer.Web.Http.Controllers
             //var resources = await _client.ListResourcesAsync();
             return Ok(new
             {
-                ServerName =  _mcpServerOptions.Value.Title,
+                ServerName = _mcpServerOptions.Value.Title,
                 Version = _mcpServerOptions.Value.Version,
                 Tools = tools,
                 //Prompts = prompts,

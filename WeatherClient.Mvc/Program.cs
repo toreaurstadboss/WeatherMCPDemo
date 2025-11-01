@@ -1,6 +1,5 @@
 using Anthropic.SDK;
 using Microsoft.Extensions.AI;
-using ModelContextProtocol.Client;
 
 namespace WeatherClient.Mvc
 {

@@ -1,8 +1,6 @@
 using Anthropic.SDK;
 using Microsoft.Extensions.AI;
 using ModelContextProtocol.Client;
-using ModelContextProtocol.Protocol;
-using ModelContextProtocol.Server;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using WeatherServer.Common;
@@ -60,7 +58,7 @@ namespace WeatherServer.Http
                         throw new InvalidOperationException("Certificate not found.");
                     }
 
-                    listenOptions.UseHttps(certificate);                    
+                    listenOptions.UseHttps(certificate);
                 });
             });
 
@@ -76,7 +74,7 @@ namespace WeatherServer.Http
                             Endpoint = new Uri(mcpEndpoint!)
                         }
                     )).GetAwaiter().GetResult();
-            });            
+            });
 
             builder.Services.Configure<ModelContextProtocol.Protocol.Implementation>(options =>
             {

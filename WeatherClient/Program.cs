@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Anthropic.SDK;
+﻿using Anthropic.SDK;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Client;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -61,7 +61,7 @@ try
     foreach (var tool in tools)
     {
         logger.LogInformation("Connected to server with tool: {ToolName}", tool.Name);
-        Console.WriteLine($"Connected to server with tools: {tool.Name}"); 
+        Console.WriteLine($"Connected to server with tools: {tool.Name}");
     }
 
     using var anthropicClient = new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPIC_API_KEY"]))

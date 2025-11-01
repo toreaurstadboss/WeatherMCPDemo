@@ -1,6 +1,6 @@
 ﻿namespace WeatherServer.Web.Http
 {
-  
+
     public class McpServerOptions
     {
 

@@ -1,7 +1,7 @@
-﻿using System.Net.Http.Headers;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Net.Http.Headers;
 using WeatherServer.Common;
 using WeatherServer.Tools;
 

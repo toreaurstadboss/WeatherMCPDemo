@@ -4,8 +4,6 @@ using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
@@ -53,13 +51,13 @@ public sealed class YrTools
         {
             return $"No current weather data found for '{location}'. Try another location to query?";
         }
-        
+
 
 
         var client = clientFactory.CreateClient(WeatherServerApiClientNames.YrApiClientName);
 
         string url = $"weatherapi/locationforecast/2.0/compact?lat={latitude.ToString(CultureInfo.InvariantCulture)}&lon={longitude.ToString(CultureInfo.InvariantCulture)}";
-        
+
         logger.LogWarning($"Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}");
 
         using var jsonDocument = await client.ReadJsonDocumentAsync(url);
@@ -202,7 +200,7 @@ $@"""
                 NextSixHoursWeatherSymbol = nextOneHourWeatherSymbol,
                 NextTwelveHoursWeatherSymbol = nextTwelveHourWeatherSymbol
             };
-        
+
             result.Add(weatherItem);
 
             if (onlyFirst)

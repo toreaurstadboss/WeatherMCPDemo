@@ -1,7 +1,7 @@
 namespace WeatherServer.Tools;
 
-using System.ComponentModel;
 using ModelContextProtocol.Server;
+using System.ComponentModel;
 using WeatherServer.Common;
 
 [McpServerToolType]
