@@ -1,19 +1,21 @@
 [
   {
-    "Name": "New Profile",
+    "Name": "Console based client-server",
     "Projects": [
       {
         "Path": "WeatherClient\\WeatherClient.Console.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "WeatherClient"
       },
       {
         "Path": "WeatherServer\\WeatherServer.Console.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "WeatherServer"
       }
     ]
   },
   {
-    "Name": "New Profile (1)",
+    "Name": "Web based client-server",
     "Projects": [
       {
         "Path": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
