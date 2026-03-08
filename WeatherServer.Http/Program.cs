@@ -14,8 +14,6 @@ namespace WeatherServer.Http
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             // Add MCP support
             builder.Services
                 .AddMcpServer()
@@ -29,43 +27,41 @@ namespace WeatherServer.Http
                 builder.Configuration.GetSection("McpClient");
             });
 
-            // Setup SSL certificate
+            // Setup SSL certificate (optional)
+            var subjectName = builder.Configuration["McpServer:CertificateSettings:SubjectName"];
 
-            string subjectName = builder.Configuration["McpServer:CertificateSettings:SubjectName"]!;
-            string? portnumberMcpRaw = builder.Configuration["McpServer:Portnumber"]!;
+            var portnumberMcp = builder.Configuration.GetValue("McpServer:Port", 7145);
 
-            int portnumberMcp = 7145;
-            if (int.TryParse(portnumberMcpRaw, out var portnumberMcpFromConfig))
+            // Only force a specific certificate if SubjectName is configured.
+            // Otherwise, let ASP.NET Core use the standard development certificate.
+            if (!string.IsNullOrWhiteSpace(subjectName))
             {
-                portnumberMcp = portnumberMcpFromConfig;
-            }
-
-            builder.WebHost.ConfigureKestrel(options =>
-            {
-                options.ListenLocalhost(portnumberMcp, listenOptions =>
+                builder.WebHost.ConfigureKestrel(options =>
                 {
-                    using var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-                    store.Open(OpenFlags.ReadOnly);
-
-                    var certs = store.Certificates.Find(
-                        X509FindType.FindBySubjectName,
-                        subjectName,
-                        validOnly: false);
-
-                    var certificate = certs.FirstOrDefault();
-                    if (certificate == null)
+                    options.ListenLocalhost(portnumberMcp, listenOptions =>
                     {
-                        throw new InvalidOperationException("Certificate not found.");
-                    }
+                        using var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+                        store.Open(OpenFlags.ReadOnly);
 
-                    listenOptions.UseHttps(certificate);
+                        var certs = store.Certificates.Find(
+                            X509FindType.FindBySubjectName,
+                            subjectName,
+                            validOnly: false);
+
+                        var certificate = certs.FirstOrDefault();
+                        if (certificate == null)
+                        {
+                            throw new InvalidOperationException($"Certificate not found in LocalMachine\\My. SubjectName='{subjectName}'.");
+                        }
+
+                        listenOptions.UseHttps(certificate);
+                    });
                 });
-            });
-
+            }
 
             var mcpEndpoint = builder.Configuration.GetSection("McpClient:Endpoint").Value;
 
-            builder.Services.AddSingleton<IMcpClient>(provider =>
+            builder.Services.AddSingleton<IMcpClient>(_ =>
             {
                 return McpClientFactory.CreateAsync(
                     new SseClientTransport(
@@ -82,7 +78,7 @@ namespace WeatherServer.Http
                 options.Version = "1.1";
             });
 
-            //Add swagger support
+            // Add swagger support
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -96,7 +92,6 @@ namespace WeatherServer.Http
             builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
             // Add named Http clients that fetches more data from external APIs
-
             builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientName, client =>
             {
                 client.BaseAddress = new Uri("https://api.weather.gov");
@@ -108,7 +103,6 @@ namespace WeatherServer.Http
                 client.BaseAddress = new Uri("https://api.met.no");
                 client.DefaultRequestHeaders.UserAgent.Clear();
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("yrweather-mcpdemoclient2-tore-tool", "1.0"));
-                //client.DefaultRequestHeaders.UserAgent.ParseAdd("ToresMcpDemo/1.0 (+https://github.com/toreaurstadboss)");
             });
 
             builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClientName, client =>
@@ -119,7 +113,6 @@ namespace WeatherServer.Http
             });
 
             // Set up Anthropic client
-
             builder.Services.AddChatClient(_ =>
                 new ChatClientBuilder(new AnthropicClient(new APIAuthentication(builder.Configuration["ANTHROPIC_API_KEY"])).Messages)
                     .UseFunctionInvocation()
@@ -127,10 +120,7 @@ namespace WeatherServer.Http
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
             app.MapControllers();
@@ -138,7 +128,7 @@ namespace WeatherServer.Http
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            app.MapMcp("/sse"); // This exposes the SSE endpoint at /sse
+            app.MapMcp("/sse"); // SSE endpoint at /sse
 
             app.Run();
         }
