@@ -46,27 +46,27 @@ namespace WeatherClient.Mvc
                 portnumberMcp = portnumberMcpFromConfig + 100; //offset the mcp port by 100 so we do not collide (Http project uses this port, so Mvc must choose another)
             }
 
-            builder.WebHost.ConfigureKestrel(options =>
-            {
-                options.ListenLocalhost(portnumberMcp, listenOptions =>
-                {
-                    using var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-                    store.Open(OpenFlags.ReadOnly);
+            //builder.WebHost.ConfigureKestrel(options =>
+            //{
+            //    options.ListenLocalhost(portnumberMcp, listenOptions =>
+            //    {
+            //        using var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
+            //        store.Open(OpenFlags.ReadOnly);
 
-                    var certs = store.Certificates.Find(
-                        X509FindType.FindBySubjectName,
-                        subjectName,
-                        validOnly: false);
+            //        var certs = store.Certificates.Find(
+            //            X509FindType.FindBySubjectName,
+            //            subjectName,
+            //            validOnly: false);
 
-                    var certificate = certs.FirstOrDefault();
-                    if (certificate == null)
-                    {
-                        throw new InvalidOperationException($"Certificate with subject '{subjectName}' not found in LocalMachine\\My store.");
-                    }
+            //        var certificate = certs.FirstOrDefault();
+            //        if (certificate == null)
+            //        {
+            //            throw new InvalidOperationException($"Certificate with subject '{subjectName}' not found in LocalMachine\\My store.");
+            //        }
 
-                    listenOptions.UseHttps(certificate);
-                });
-            });
+            //        listenOptions.UseHttps(certificate);
+            //    });
+            //});
 
             var app = builder.Build();
 

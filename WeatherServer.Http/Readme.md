@@ -1,6 +1,9 @@
 ﻿# WeatherMcpDemo
 
-To set up ModelInspector in LocalDEV, first set up a self-signed certificate. 
+To set up ModelInspector in LocalDEV, first set up a self-signed certificate.
+
+It is suggested to run from VS 2026 using Firefox as browser as it allows a bit more flexible rules about certificates in LocalDEV.
+
 Run the following command with sufficient priviledges to automatically set 
 up such a self-signed certificate :
 
