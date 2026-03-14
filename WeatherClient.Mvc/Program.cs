@@ -1,6 +1,5 @@
 using Anthropic.SDK;
 using Microsoft.Extensions.AI;
-using System.Security.Cryptography.X509Certificates;
 
 namespace WeatherClient.Mvc
 {

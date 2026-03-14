@@ -174,7 +174,6 @@ $@"""
             }
 
             string timeRaw = currentWeather.GetProperty("time").GetString()!;
-            string format = "yyyy-MM-ddTHH:mm:ssZ";
             DateTime parsedDate = DateTime.Parse(timeRaw, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
             var instantDetails = instant.GetProperty("details");
 
