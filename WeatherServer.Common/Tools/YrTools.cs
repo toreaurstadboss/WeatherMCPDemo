@@ -96,7 +96,7 @@ $@"""
     7. Check the current day with the system clock. Forecast should be the following days from the current day.
 
     Response Requirements:
-    - It is very important that the corret url is used, longitude and latitude here will be provided . $""weatherapi/locationforecast/2.0/compact?lat={{latitude}}&lon={{longitude}}""
+    - It is very important that the correct url is used, longitude and latitude here will be provided . $""weatherapi/locationforecast/2.0/compact?lat={{latitude}}&lon={{longitude}}""
     - Always include the latitude and longitude used.
     - Always include the 'time' field from the result to indicate when the weather data is valid.
     - Clearly state that the data was retrieved using 'YrWeatherTenDayForecast'.
