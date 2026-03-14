@@ -1,0 +1,1787 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-03-14T22:11:41.9868368Z",
+  "analysisEndTime": "2026-03-14T22:11:44.982842Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 5,
+      "issues": 3,
+      "incidents": 60,
+      "effort": 60
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 5,
+        "Optional": 0,
+        "Potential": 55,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 7,
+        "Project": 5,
+        "Api": 48
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "WeatherClient\\WeatherClient.Console.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 6,
+      "properties": {
+        "appName": "WeatherClient.Console",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 1,
+        "numberOfCodeFiles": 1,
+        "linesTotal": 161,
+        "linesOfCode": 161,
+        "totalApiScanned": 235,
+        "minLinesOfCodeToChange": 4,
+        "maxLinesOfCodeToChange": 4
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "2358ab3e-056e-48d1-abd8-ab1352504764",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherClient\\WeatherClient.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+              "protected": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherClient\\WeatherClient.Console.csproj",
+            "snippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "label": "Microsoft.Extensions.Hosting 10.0.0-preview.6.25358.103",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Hosting",
+              "PackageVersion": "10.0.0-preview.6.25358.103",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "520acf0c-72ad-4ba8-9497-17a9c9684ae7",
+          "ruleId": "Project.0002",
+          "projectPath": "WeatherClient\\WeatherClient.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "WeatherClient\\WeatherClient.Console.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "d623814c-4a4e-47f2-b7df-bbcb0101560c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherClient\\WeatherClient.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "clientTransport = new SseClientTransport(new()\r\n    {\r\n        Endpoint = new Uri(\u0022http://localhost:3001\u0022)\r\n    });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherClient\\Program.cs",
+            "snippet": "clientTransport = new SseClientTransport(new()\r\n    {\r\n        Endpoint = new Uri(\u0022http://localhost:3001\u0022)\r\n    });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 37,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "05ddd9d6-7679-4abc-b062-ab810aadec40",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherClient\\WeatherClient.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "clientTransport = new SseClientTransport(new()\r\n    {\r\n        Endpoint = new Uri(\u0022http://localhost:3001\u0022)\r\n    });",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherClient\\Program.cs",
+            "snippet": "clientTransport = new SseClientTransport(new()\r\n    {\r\n        Endpoint = new Uri(\u0022http://localhost:3001\u0022)\r\n    });",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 37,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "8b53b01a-da7a-47fc-af98-b24bb9b5c2eb",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherClient\\WeatherClient.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "clientTransport = new SseClientTransport(new()\r\n    {\r\n        Endpoint = new Uri(\u0022http://localhost:3001\u0022)\r\n    });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherClient\\Program.cs",
+            "snippet": "clientTransport = new SseClientTransport(new()\r\n    {\r\n        Endpoint = new Uri(\u0022http://localhost:3001\u0022)\r\n    });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 37,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "6a59a7e3-a1f4-4471-86ef-3d870af2bd34",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Message no longer duplicated in Console log output ",
+          "projectPath": "WeatherClient\\WeatherClient.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Logging.AddConsole(options =\u003E\r\n{\r\n    options.LogToStandardErrorThreshold = LogLevel.Trace;\r\n});",
+              "protected": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})"
+            },
+            "kind": "File",
+            "path": "WeatherClient\\Program.cs",
+            "snippet": "builder.Logging.AddConsole(options =\u003E\r\n{\r\n    options.LogToStandardErrorThreshold = LogLevel.Trace;\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "label": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/console-json-logging-duplicate-messages.md",
+                "isCustom": false
+              }
+            ],
+            "line": 14,
+            "column": 0
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 7,
+      "properties": {
+        "appName": "WeatherClient.Web.Mvc",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 17,
+        "numberOfCodeFiles": 12,
+        "linesTotal": 508,
+        "linesOfCode": 458,
+        "totalApiScanned": 1638,
+        "minLinesOfCodeToChange": 5,
+        "maxLinesOfCodeToChange": 5
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "f8cc00d5-51a3-4c87-bb53-78583d9fcc4e",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+              "protected": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+            "snippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "label": "Microsoft.Extensions.Hosting 10.0.0-preview.6.25358.103",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Hosting",
+              "PackageVersion": "10.0.0-preview.6.25358.103",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "5673cb05-239c-492a-9b3e-d1bbba138566",
+          "ruleId": "Project.0002",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "d6dcb6f8-5482-48da-9a31-76601b6b9b5c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\Controllers\\ChatController.cs",
+            "snippet": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 52,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "9f3e2534-5130-4a23-8e4a-25182044f8d4",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\Controllers\\ChatController.cs",
+            "snippet": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 52,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "d60fb9c4-5c66-475b-ad83-f0e799b9cafa",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\Controllers\\ChatController.cs",
+            "snippet": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 52,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "d7ba9595-bc68-4aa1-b1f0-52b4be3b38f7",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Exception diagnostics are suppressed when IExceptionHandler.TryHandleAsync returns true ",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseExceptionHandler(\u0022/Home/Error\u0022);",
+              "protected": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\Program.cs",
+            "snippet": "app.UseExceptionHandler(\u0022/Home/Error\u0022);",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "label": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/exception-handler-diagnostics-suppressed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 75,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "d4b4755b-f9b6-49c5-8ce0-95e8c4c9268c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Message no longer duplicated in Console log output ",
+          "projectPath": "WeatherClient.Mvc\\WeatherClient.Web.Mvc.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Logging.AddConsole(options =\u003E\r\n            {\r\n                options.LogToStandardErrorThreshold = LogLevel.Trace;\r\n            });",
+              "protected": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})"
+            },
+            "kind": "File",
+            "path": "WeatherClient.Mvc\\Program.cs",
+            "snippet": "builder.Logging.AddConsole(options =\u003E\r\n            {\r\n                options.LogToStandardErrorThreshold = LogLevel.Trace;\r\n            });",
+            "protectedSnippet": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "label": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/console-json-logging-duplicate-messages.md",
+                "isCustom": false
+              }
+            ],
+            "line": 13,
+            "column": 12
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "WeatherServer.Common\\WeatherServer.Common.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 10,
+      "properties": {
+        "appName": "WeatherServer.Common",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 7,
+        "numberOfCodeFiles": 7,
+        "linesTotal": 453,
+        "linesOfCode": 453,
+        "totalApiScanned": 514,
+        "minLinesOfCodeToChange": 7,
+        "maxLinesOfCodeToChange": 7
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "8a86bfaf-9bce-4052-97fe-64de9a617c65",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Http, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5",
+              "protected": "Microsoft.Extensions.Http, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\WeatherServer.Common.csproj",
+            "snippet": "Microsoft.Extensions.Http, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Http, 8.0.0\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5",
+            "label": "Microsoft.Extensions.Http 8.0.0",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Http",
+              "PackageVersion": "8.0.0",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "a0ea955a-3ef0-480a-a96b-887fe01cd3a3",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+              "protected": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\WeatherServer.Common.csproj",
+            "snippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "label": "Microsoft.Extensions.Hosting 10.0.0-preview.6.25358.103",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Hosting",
+              "PackageVersion": "10.0.0-preview.6.25358.103",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "26f91e2a-d38d-471e-a557-e394f046c002",
+          "ruleId": "Project.0002",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\WeatherServer.Common.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "3a46e432-9a0b-4f2d-87ef-24391d583a7a",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "logger.LogWarning($\u0022Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\YrTools.cs",
+            "snippet": "logger.LogWarning($\u0022Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 123,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "d23f8545-6ab4-464a-b42c-775e268ad9b7",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "logger.LogWarning($\u0022Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\YrTools.cs",
+            "snippet": "logger.LogWarning($\u0022Accessing Yr Current Weather with url: {url} with client base address {client.BaseAddress}\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 60,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "a53091aa-cf78-423a-8f68-3bf3358741b4",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "using var jsonDocument = await client.ReadJsonDocumentAsync($\u0022/search?q={Uri.EscapeDataString(place)}\u0026format=geojson\u0026limit=1\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\NominatimTools.cs",
+            "snippet": "using var jsonDocument = await client.ReadJsonDocumentAsync($\u0022/search?q={Uri.EscapeDataString(place)}\u0026format=geojson\u0026limit=1\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "dd518dee-1445-47ee-830d-cb4e0cb9a887",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\HttpClientExtensions.cs",
+            "snippet": "return await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 25,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "3332ca72-9727-4fc1-8a8a-d2c760e01a98",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());",
+              "protected": "M:System.Net.Http.HttpContent.ReadAsStreamAsync"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\HttpClientExtensions.cs",
+            "snippet": "return await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());",
+            "protectedSnippet": "M:System.Net.Http.HttpContent.ReadAsStreamAsync",
+            "label": "M:System.Net.Http.HttpContent.ReadAsStreamAsync",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 25,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "4b315e1e-25be-454f-ace5-19bf67c5fff9",
+          "ruleId": "Api.0003",
+          "description": "Nullable JsonDocument properties deserialize to JsonValueKind.Null ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());",
+              "protected": "T:System.Text.Json.JsonDocument"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\HttpClientExtensions.cs",
+            "snippet": "return await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());",
+            "protectedSnippet": "T:System.Text.Json.JsonDocument",
+            "label": "T:System.Text.Json.JsonDocument",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/serialization/9.0/jsondocument-props.md",
+                "isCustom": false
+              }
+            ],
+            "line": 25,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "ca13c090-d0ed-4233-bded-44b8434f33c2",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Common\\WeatherServer.Common.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var forecastUrl = locationDocument.RootElement.GetProperty(\u0022properties\u0022).GetProperty(\u0022forecast\u0022).GetString()\r\n            ?? throw new McpException($\u0022No forecast URL provided by {client.BaseAddress}points/{latitude},{longitude}\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Common\\Tools\\UnitedStatesWeatherTools.cs",
+            "snippet": "var forecastUrl = locationDocument.RootElement.GetProperty(\u0022properties\u0022).GetProperty(\u0022forecast\u0022).GetString()\r\n            ?? throw new McpException($\u0022No forecast URL provided by {client.BaseAddress}points/{latitude},{longitude}\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 57,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "WeatherServer\\WeatherServer.Console.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 16,
+      "properties": {
+        "appName": "WeatherServer.Console",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 1,
+        "numberOfCodeFiles": 1,
+        "linesTotal": 47,
+        "linesOfCode": 47,
+        "totalApiScanned": 115,
+        "minLinesOfCodeToChange": 13,
+        "maxLinesOfCodeToChange": 13
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "107ea273-a609-4846-b2bc-06c9ae952b2c",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+              "protected": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\WeatherServer.Console.csproj",
+            "snippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "label": "Microsoft.Extensions.Hosting 10.0.0-preview.6.25358.103",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Hosting",
+              "PackageVersion": "10.0.0-preview.6.25358.103",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "d4ccfe40-9450-41a4-aa15-933d6532bcee",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Http, 9.0.9\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5",
+              "protected": "Microsoft.Extensions.Http, 9.0.9\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\WeatherServer.Console.csproj",
+            "snippet": "Microsoft.Extensions.Http, 9.0.9\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Http, 9.0.9\n\nRecommendation:\n\nRemove Microsoft.Extensions.Http, and replace with new package Microsoft.Extensions.Http 10.0.5",
+            "label": "Microsoft.Extensions.Http 9.0.9",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Http",
+              "PackageVersion": "9.0.9",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "45aea7e8-05fa-44bd-be88-94d23081011d",
+          "ruleId": "Project.0002",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\WeatherServer.Console.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "e2846f7c-297d-467e-a98b-acd058803815",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 40,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "42c07fba-4a3c-4703-95bc-c793cc176262",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 40,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "6446842e-2526-46ce-be9b-552d419b75da",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 40,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "51617075-4977-4b91-802d-6f2995f6a9b7",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClientName, client =\u003E\r\n{\r\n    client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);\r\n    client.DefaultRequestHeaders.UserAgent.Clear();\r\n    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022nominatim-openstreetmap-api-tool\u0022, \u00221.0\u0022));\r\n});",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClientName, client =\u003E\r\n{\r\n    client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);\r\n    client.DefaultRequestHeaders.UserAgent.Clear();\r\n    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022nominatim-openstreetmap-api-tool\u0022, \u00221.0\u0022));\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 38,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "a1c422ca-2563-425c-99c6-bc92cda91b4c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 32,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "0b7ae0b0-c11d-41f3-ad16-f04ccc1396a3",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 32,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "2eb1ca86-5181-40ad-bdc1-4d9bfe73ed85",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 32,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "e890fb79-91bc-4cf9-bbef-fd7027773fdc",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, client =\u003E\r\n{\r\n    client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);\r\n    client.DefaultRequestHeaders.UserAgent.Clear();\r\n    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022yrweather-mcpdemoclient7-tore-tool\u0022, \u00221.0\u0022));\r\n    //client.DefaultRequestHeaders.UserAgent.ParseAdd(\u0022ToresMcpDemo/1.0 (\u002Bhttps://github.com/toreaurstadboss)\u0022);\r\n});",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, client =\u003E\r\n{\r\n    client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);\r\n    client.DefaultRequestHeaders.UserAgent.Clear();\r\n    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022yrweather-mcpdemoclient7-tore-tool\u0022, \u00221.0\u0022));\r\n    //client.DefaultRequestHeaders.UserAgent.ParseAdd(\u0022ToresMcpDemo/1.0 (\u002Bhttps://github.com/toreaurstadboss)\u0022);\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 30,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "0dc96412-b0e3-4527-bcdb-2fbf44092a04",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 26,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "c4e1b5ac-4e7d-4d1e-bcf2-83f5a4c5c84a",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 26,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "cbcd47a3-3490-4024-a2cd-6b4ea6fc6a85",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 26,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "287c2f67-6c3d-4361-998a-7fc7a36cd556",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientName, client =\u003E\r\n{\r\n    client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);\r\n    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022us-weather-democlient1-tool\u0022, \u00221.0\u0022));\r\n});",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientName, client =\u003E\r\n{\r\n    client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);\r\n    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022us-weather-democlient1-tool\u0022, \u00221.0\u0022));\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 24,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "eda01f24-b253-4dfd-935d-41b334721cb1",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Message no longer duplicated in Console log output ",
+          "projectPath": "WeatherServer\\WeatherServer.Console.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Logging.AddConsole(options =\u003E\r\n{\r\n    options.LogToStandardErrorThreshold = LogLevel.Warning;\r\n});",
+              "protected": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})"
+            },
+            "kind": "File",
+            "path": "WeatherServer\\Program.cs",
+            "snippet": "builder.Logging.AddConsole(options =\u003E\r\n{\r\n    options.LogToStandardErrorThreshold = LogLevel.Warning;\r\n});",
+            "protectedSnippet": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "label": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/console-json-logging-duplicate-messages.md",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 0
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 21,
+      "properties": {
+        "appName": "WeatherServer.Web.Http",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 6,
+        "numberOfCodeFiles": 4,
+        "linesTotal": 315,
+        "linesOfCode": 289,
+        "totalApiScanned": 430,
+        "minLinesOfCodeToChange": 19,
+        "maxLinesOfCodeToChange": 19
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "7ace6852-c248-4c9d-bf21-8e2304116d5c",
+          "ruleId": "NuGet.0002",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+              "protected": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+            "snippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "protectedSnippet": "Microsoft.Extensions.Hosting, 10.0.0-preview.6.25358.103\n\nRecommendation:\n\nRemove Microsoft.Extensions.Hosting, and replace with new package Microsoft.Extensions.Hosting 10.0.5",
+            "label": "Microsoft.Extensions.Hosting 10.0.0-preview.6.25358.103",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Hosting",
+              "PackageVersion": "10.0.0-preview.6.25358.103",
+              "PackageNewVersion": "10.0.5",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "69cec754-b9a4-444b-8262-edafb7d57335",
+          "ruleId": "Project.0002",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "bca5d31d-c0c4-4d88-a714-7fbdafb7b20e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Controllers\\ChatController.cs",
+            "snippet": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 46,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "2a2ef1f5-eb25-456b-bc44-7c28647c609c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Controllers\\ChatController.cs",
+            "snippet": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 46,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "a8f1729a-d308-43ff-98df-21c55e42844e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Controllers\\ChatController.cs",
+            "snippet": "var mcpClient = await McpClientFactory.CreateAsync(\r\n                new SseClientTransport(\r\n                    new SseClientTransportOptions\r\n                    {\r\n                        Endpoint = new Uri(\u0022https://localhost:7145/sse\u0022)\r\n                    }\r\n                )\r\n            );",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 46,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "1e63ed80-4ae1-4797-a80e-ea61dbbfc707",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 115,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "05c7cbc4-fad1-4cfe-bcb6-cc453e028f12",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 115,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "ece88971-0588-49f5-8e66-adfd0f7398a2",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 115,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "48ae4d2d-0ff6-4f8b-8846-e8fa66b27c9d",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClientName, client =\u003E\r\n            {\r\n                client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);\r\n                client.DefaultRequestHeaders.UserAgent.Clear();\r\n                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022nominatim-openstreetmap-client2-api-tool\u0022, \u00221.0\u0022));\r\n            });",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(WeatherServerApiClientNames.OpenStreetmapApiClientName, client =\u003E\r\n            {\r\n                client.BaseAddress = new Uri(\u0022https://nominatim.openstreetmap.org\u0022);\r\n                client.DefaultRequestHeaders.UserAgent.Clear();\r\n                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022nominatim-openstreetmap-client2-api-tool\u0022, \u00221.0\u0022));\r\n            });",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 113,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "96ae7379-c219-47ff-954d-a5ff2b836ddd",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 107,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "f2d7f467-d604-4f4c-bc47-4c75fc5f0c7c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 107,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "9dd18c19-9c4a-44b6-bb18-51ae120aeaaf",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 107,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "e0bc64e8-4415-4bf9-b36b-82449cf8ca3a",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, client =\u003E\r\n            {\r\n                client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);\r\n                client.DefaultRequestHeaders.UserAgent.Clear();\r\n                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022yrweather-mcpdemoclient2-tore-tool\u0022, \u00221.0\u0022));\r\n                //client.DefaultRequestHeaders.UserAgent.ParseAdd(\u0022ToresMcpDemo/1.0 (\u002Bhttps://github.com/toreaurstadboss)\u0022);\r\n            });",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(WeatherServerApiClientNames.YrApiClientName, client =\u003E\r\n            {\r\n                client.BaseAddress = new Uri(\u0022https://api.met.no\u0022);\r\n                client.DefaultRequestHeaders.UserAgent.Clear();\r\n                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022yrweather-mcpdemoclient2-tore-tool\u0022, \u00221.0\u0022));\r\n                //client.DefaultRequestHeaders.UserAgent.ParseAdd(\u0022ToresMcpDemo/1.0 (\u002Bhttps://github.com/toreaurstadboss)\u0022);\r\n            });",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 105,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "194dec21-4ca2-470c-b979-257790ca7da4",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 101,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "1a60a33d-da1a-490a-87ca-e151d98405c8",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 101,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "a9210fdc-cd25-4fe1-9dc1-0794fc197fea",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 101,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "d1d67b80-9d68-44cf-ac16-6d37e3e8639b",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientName, client =\u003E\r\n            {\r\n                client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);\r\n                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022us-weather-democlient2-tool\u0022, \u00221.0\u0022));\r\n            });",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "builder.Services.AddHttpClient(WeatherServerApiClientNames.WeatherGovApiClientName, client =\u003E\r\n            {\r\n                client.BaseAddress = new Uri(\u0022https://api.weather.gov\u0022);\r\n                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(\u0022us-weather-democlient2-tool\u0022, \u00221.0\u0022));\r\n            });",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 99,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "ae03daa0-56c3-4d2d-b8f1-10209cb30254",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Message no longer duplicated in Console log output ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Logging.AddConsole(options =\u003E\r\n            {\r\n                options.LogToStandardErrorThreshold = LogLevel.Warning;\r\n            });",
+              "protected": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "builder.Logging.AddConsole(options =\u003E\r\n            {\r\n                options.LogToStandardErrorThreshold = LogLevel.Warning;\r\n            });",
+            "protectedSnippet": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "label": "M:Microsoft.Extensions.Logging.ConsoleLoggerExtensions.AddConsole(Microsoft.Extensions.Logging.ILoggingBuilder,System.Action{Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/console-json-logging-duplicate-messages.md",
+                "isCustom": false
+              }
+            ],
+            "line": 91,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "3cb54251-a8c9-4ee1-bb4a-695a0f1fb46e",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return McpClientFactory.CreateAsync(\r\n                    new SseClientTransport(\r\n                        new SseClientTransportOptions\r\n                        {\r\n                            Endpoint = new Uri(mcpEndpoint!)\r\n                        }\r\n                    )).GetAwaiter().GetResult();",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "return McpClientFactory.CreateAsync(\r\n                    new SseClientTransport(\r\n                        new SseClientTransportOptions\r\n                        {\r\n                            Endpoint = new Uri(mcpEndpoint!)\r\n                        }\r\n                    )).GetAwaiter().GetResult();",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 69,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "8ef9b257-81e0-4f82-86fc-4b8301af7014",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return McpClientFactory.CreateAsync(\r\n                    new SseClientTransport(\r\n                        new SseClientTransportOptions\r\n                        {\r\n                            Endpoint = new Uri(mcpEndpoint!)\r\n                        }\r\n                    )).GetAwaiter().GetResult();",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "return McpClientFactory.CreateAsync(\r\n                    new SseClientTransport(\r\n                        new SseClientTransportOptions\r\n                        {\r\n                            Endpoint = new Uri(mcpEndpoint!)\r\n                        }\r\n                    )).GetAwaiter().GetResult();",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 69,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "9e3f45c6-1d77-4e66-977b-01ebbe7f565f",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "WeatherServer.Http\\WeatherServer.Web.Http.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return McpClientFactory.CreateAsync(\r\n                    new SseClientTransport(\r\n                        new SseClientTransportOptions\r\n                        {\r\n                            Endpoint = new Uri(mcpEndpoint!)\r\n                        }\r\n                    )).GetAwaiter().GetResult();",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "WeatherServer.Http\\Program.cs",
+            "snippet": "return McpClientFactory.CreateAsync(\r\n                    new SseClientTransport(\r\n                        new SseClientTransportOptions\r\n                        {\r\n                            Endpoint = new Uri(mcpEndpoint!)\r\n                        }\r\n                    )).GetAwaiter().GetResult();",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 69,
+            "column": 16
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    }
+  }
+}
