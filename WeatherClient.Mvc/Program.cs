@@ -15,9 +15,7 @@ namespace WeatherClient.Mvc
             {
                 options.LogToStandardErrorThreshold = LogLevel.Trace;
             });
-            //builder.Logging.SetMinimumLevel(LogLevel.Trace);
 
-            var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>(); // Get logger
 
             builder.Configuration
                 .AddEnvironmentVariables()
