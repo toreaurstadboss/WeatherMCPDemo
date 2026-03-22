@@ -1,69 +1,16 @@
 ﻿# WeatherMcpDemo
 
-To set up ModelInspector in LocalDEV, first set up a self-signed certificate.
-
-It is suggested to run from VS 2026 using Firefox as browser as it allows a bit more flexible rules about certificates in LocalDEV.
-
-Run the following command with sufficient priviledges to automatically set 
-up such a self-signed certificate :
-
-### Setting up self-signed certificate for the MCP server
-
-```ps
-
-# Variables
-$certName = "WeatherMcpClientLocalDev2025"
-$dnsName = "localhost"
-$pfxPath = "C:\temp\$certName.pfx"
-$pfxPassword = "YourStrongPassword2025!klmnpQ4xxzz"
-
-Write-Host "Generating self-signed certificate for $dnsName..."
-
-# 1. Create the certificate with SAN and 1-year validity
-$cert = New-SelfSignedCertificate `
-    -DnsName $dnsName `
-    -CertStoreLocation "cert:\LocalMachine\My" `
-    -Subject $certName `
-    -FriendlyName $certName `
-    -NotAfter (Get-Date).AddYears(1)
-
-Write-Host "Certificate created with Thumbprint: $($cert.Thumbprint)"
-
-# 2. Export the certificate to PFX
-Write-Host "Exporting certificate to $pfxPath..."
-Export-PfxCertificate `
-    -Cert "cert:\LocalMachine\My\$($cert.Thumbprint)" `
-    -FilePath $pfxPath `
-    -Password (ConvertTo-SecureString -String $pfxPassword -Force -AsPlainText)
-
-# 3. Import into Trusted Root Certification Authorities
-Write-Host "Importing certificate into Trusted Root Certification Authorities..."
-
-Import-PfxCertificate `
-    -FilePath $pfxPath `
-    -CertStoreLocation "cert:\LocalMachine\Root" `
-    -Password (ConvertTo-SecureString -String $pfxPassword -Force -AsPlainText)
-
-# 3. Import also into the My (Personal) cert store
-Import-PfxCertificate `
-    -FilePath $pfxPath `
-    -CertStoreLocation "cert:\LocalMachine\My" `
-    -Password (ConvertTo-SecureString -String $pfxPassword -Force -AsPlainText)
-
-
-Write-Host "✅ Certificate '$certName' installed and trusted successfully!"
-Write-Host "Use this cert in .NET Kestrel with SubjectName: $certName"
-```
-Afterwards, the certificate should be found by the setup code in the setup `Program.cs`.
-
-ModelInspector expects the SSL traffic to have a valid certificate, but in LocalDEV you can use 
-such a self-signed certificate.
+To set up ModelInspector in LocalDEV.
 
 Start the server and then start up ModelInspector.
 
-Run this command to start ModelInspector, you will need to have Node installed with a version
-that supports modern ES modules and fetch API, so at least Node version 20. I tested with 
-Node version 25.
+I have created Startup configurations called 'Web based client-server' and 'Consoel based client-server'
+for easy startup of the projects needed for the demo to work.
+
+In case you got some certificates issues over HTTPS traffic in LocalDEV, consider using Mozilla Firefox and 
+add an exception. I did not come accross any issues and use Chrome Canary as the web browser 
+when I test out and run the demo.
+
 
 ## Starting Model Inspector
 
@@ -87,9 +34,9 @@ Once inside ModelContextInspector, choose
 - Transport Type set to :
 Streamable HTTP
 - URL set to: 
-https://localhost:7145/sse
+https://localhost:7145/mcp
 - Connection Type set to:
-Via Proxy
+Via Proxy  (if needed)
 
 Once ready, enter the button Connect : Connect
 It should say _Connected_ with a green diode indicator.
