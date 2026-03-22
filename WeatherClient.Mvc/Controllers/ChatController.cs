@@ -50,13 +50,12 @@ namespace WeatherClient.Mvc.Controllers
             }
 
             // Create MCP client connecting to our MCP server
-            var mcpClient = await McpClientFactory.CreateAsync(
-                new SseClientTransport(
-                    new SseClientTransportOptions
-                    {
-                        Endpoint = new Uri("https://localhost:7145/sse")
-                    }
-                )
+            await using var mcpClient = await McpClient.CreateAsync(
+                new HttpClientTransport(new HttpClientTransportOptions
+                {
+                    Endpoint = new Uri("https://localhost:7145/mcp"),
+                    TransportMode = HttpTransportMode.StreamableHttp
+                })
             );
             // Get available tools from the MCP server
             var tools = await mcpClient.ListToolsAsync();

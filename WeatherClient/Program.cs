@@ -34,10 +34,16 @@ logger.LogInformation("Starting MCP client with command: {Command} and arguments
 
 if (command == "http")
 {
-    logger.LogInformation("Using SSE transport to connect to MCP server at http://localhost:3001");
-    clientTransport = new SseClientTransport(new()
+    logger.LogInformation("Using Streamable HTTP transport to connect to MCP server at http://localhost:3001");
+    // SSE transport removed in MCP v1.1.0 - using StreamableHttp instead
+    // clientTransport = new SseClientTransport(new()
+    // {        
+    //     Endpoint = new Uri("http://localhost:3001")
+    // });
+    clientTransport = new HttpClientTransport(new HttpClientTransportOptions
     {
-        Endpoint = new Uri("http://localhost:3001")
+        Endpoint = new Uri("http://localhost:3001"),
+        TransportMode = HttpTransportMode.StreamableHttp
     });
 }
 else
@@ -54,7 +60,8 @@ else
 try
 {
     // Client Initialization setting up the transport type and commands to run the server 
-    await using IMcpClient mcpClient = await McpClientFactory.CreateAsync(clientTransport);
+    // IMcpClient and McpClientFactory removed in MCP v1.1.0 - use McpClient.CreateAsync directly
+    await using McpClient mcpClient = await McpClient.CreateAsync(clientTransport);
 
     var tools = await mcpClient.ListToolsAsync();
 
