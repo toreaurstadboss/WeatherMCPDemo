@@ -2,7 +2,6 @@ using Anthropic.SDK;
 using Microsoft.Extensions.AI;
 using ModelContextProtocol.Client;
 using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
 using WeatherServer.Common;
 using WeatherServer.Tools;
 
@@ -27,55 +26,23 @@ namespace WeatherServer.Http
                 builder.Configuration.GetSection("McpClient");
             });
 
-            // Setup SSL certificate (optional)
-            var subjectName = builder.Configuration["McpServer:CertificateSettings:SubjectName"];
-
-            var portnumberMcp = builder.Configuration.GetValue("McpServer:Port", 7145);
-
-            // Only force a specific certificate if SubjectName is configured.
-            // Otherwise, let ASP.NET Core use the standard development certificate.
-            if (!string.IsNullOrWhiteSpace(subjectName))
-            {
-                builder.WebHost.ConfigureKestrel(options =>
-                {
-                    options.ListenLocalhost(portnumberMcp, listenOptions =>
-                    {
-                        using var store = new X509Store(StoreName.My, StoreLocation.LocalMachine);
-                        store.Open(OpenFlags.ReadOnly);
-
-                        var certs = store.Certificates.Find(
-                            X509FindType.FindBySubjectName,
-                            subjectName,
-                            validOnly: false);
-
-                        var certificate = certs.FirstOrDefault();
-                        if (certificate == null)
-                        {
-                            throw new InvalidOperationException($"Certificate not found in LocalMachine\\My. SubjectName='{subjectName}'.");
-                        }
-
-                        listenOptions.UseHttps(certificate);
-                    });
-                });
-            }
-
             var mcpEndpoint = builder.Configuration.GetSection("McpClient:Endpoint").Value;
 
-            builder.Services.AddSingleton<IMcpClient>(_ =>
+            builder.Services.AddSingleton<McpClient>(_ =>
             {
-                return McpClientFactory.CreateAsync(
-                    new SseClientTransport(
-                        new SseClientTransportOptions
-                        {
-                            Endpoint = new Uri(mcpEndpoint!)
-                        }
-                    )).GetAwaiter().GetResult();
+                return McpClient.CreateAsync(
+                    new HttpClientTransport(new HttpClientTransportOptions
+                    {
+                        Endpoint = new Uri(mcpEndpoint!),
+                        TransportMode = HttpTransportMode.StreamableHttp
+                    })
+                ).GetAwaiter().GetResult();
             });
 
             builder.Services.Configure<ModelContextProtocol.Protocol.Implementation>(options =>
             {
                 options.Title = "WeatherMcpDemoServer";
-                options.Version = "1.1";
+                options.Version = "1.2";
             });
 
             // Add swagger support
@@ -128,7 +95,7 @@ namespace WeatherServer.Http
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            app.MapMcp("/sse"); // SSE endpoint at /sse
+            app.MapMcp("/mcp"); // MCP Streamable HTTP endpoint
 
             app.Run();
         }

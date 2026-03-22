@@ -9,10 +9,10 @@ namespace WeatherServer.Web.Http.Controllers
     [Route("[controller]")]
     public class ToolsController : ControllerBase
     {
-        private readonly IMcpClient _client;
+        private readonly McpClient _client;
         private readonly IOptions<ModelContextProtocol.Protocol.Implementation> _mcpServerOptions;
 
-        public ToolsController(IMcpClient client, IOptions<ModelContextProtocol.Protocol.Implementation> mcpServerOptions)
+        public ToolsController(McpClient client, IOptions<ModelContextProtocol.Protocol.Implementation> mcpServerOptions)
         {
             _client = client;
             _mcpServerOptions = mcpServerOptions;
